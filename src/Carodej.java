@@ -4,8 +4,8 @@ public class Carodej extends Postava{
 
     Random rd = new Random();
 
-    public Carodej(int zdravi, int sila, int inteligence, int stesti, String typ) {
-        super(zdravi, sila, inteligence, stesti, typ);
+    public Carodej(int zdravi, int sila, int inteligence, int stesti, String typ, int maxZdravi) {
+        super(zdravi, sila, inteligence, stesti, typ, maxZdravi);
     }
 
     @Override

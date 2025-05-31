@@ -3,9 +3,9 @@
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("Test");
-        System.out.println("Test2");
-        System.out.println("Test3");
+        Barbar barbar = new Barbar(1000,100,100,100,"Barbar",100);
+        Carodej carodej = new Carodej(1000,100,100,100,"Carodej",100);
+        Hrac hrac = new Hrac(1000,100,100,100,"Hrac",100,100);
 
 
     }

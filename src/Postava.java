@@ -11,7 +11,7 @@ public abstract class Postava implements Killable {
 
     Random rd = new Random();
 
-    public Postava(int zdravi, int sila, int inteligence, int stesti, String typ) {
+    public Postava(int zdravi, int sila, int inteligence, int stesti, String typ, int maxZdravi) {
         this.zdravi = zdravi;
         this.sila = sila;
         this.inteligence = inteligence;

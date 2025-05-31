@@ -7,8 +7,8 @@ public class Hrac extends Postava implements Killable {
     Scanner sc = new Scanner(System.in);
     ArrayList<Kouzla> kouzla;
 
-    public Hrac(int zdravi, int sila, int inteligence, int stesti, String typ, int dovednostniBody) {
-        super(zdravi, sila, inteligence, stesti, typ);
+    public Hrac(int zdravi, int sila, int inteligence, int stesti, String typ, int maxZdravi, int dovednostniBody) {
+        super(zdravi, sila, inteligence, stesti, typ, maxZdravi);
         this.dovednostniBody = dovednostniBody;
         kouzla = new ArrayList<>();
     }
