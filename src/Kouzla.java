@@ -3,7 +3,7 @@ public class Kouzla {
     public Kouzla() {
     }
 
-    // 1. kouzlo: Fireball = silnejsi utok
+    // 1. kouzlo: Fireball = silnejsi utokk
     public void fireball(Postava a, Postava b){
         int hit = a.getInteligence() + 25;
         b.setZdravi(b.getZdravi() - hit);
