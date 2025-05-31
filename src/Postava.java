@@ -25,17 +25,17 @@ public abstract class Postava implements Killable {
         if (rd.nextInt(0, 100) < stesti) {
             int hit = a.getSila() *2;
             b.setZdravi(b.getZdravi() - hit);
-            System.out.println(a.getTyp()+ " ti dal Critical hit!: -" + hit);
-            System.out.print(b.getTyp() + " zdravi: " + b.getZdravi());
+            System.out.println(a.getTyp() + " pouzil utok!");
+            System.out.println("Critical hit!: -" + hit);
+            System.out.println(b.getTyp() + " zdravi: " + b.getZdravi());
         }else {
             int hit = a.getSila();
             b.setZdravi(b.getZdravi() - hit);
-            System.out.println(a.getTyp()+ " ti dal hit: -" + hit);
-            System.out.print(b.getTyp() + " zdravi: " + b.getZdravi());
-        }
-        if (b.getZdravi() <= 0){
+            System.out.println(a.getTyp() + " pouzil utok!");
+            System.out.println("Hit: -" + hit);
             b.kill();
         }
+        System.out.println();
     }
 
     public int getZdravi() {

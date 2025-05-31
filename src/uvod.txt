@@ -1,2 +1,18 @@
 Vitej v me RPG hre!
 
+Cilem hry je dostat se na vrchol veze a zabit veskere nepratele, kteri ti v tom budou branit.
+Zde jsou vysvetleny veskere atributy a kouzla:
+
+Zdravi: Tvuj aktualni pocet zivotu.
+Sila: Velikost poskozeni, ktere das klasickym utokem.
+Inteligence: Velikost poskozeni, ktere das magickym utokem.
+Stesti: Pravdepodobnost na critical hit.
+
+Fireball: Ohniva koule, ktera je o neco silnejsi nez klasicky utok.
+Poison: Mala otrava, ktera dava male poskozeni po dobu celeho zapasu.
+Zap: Maly vyboj blesku, po kterem muzes opet hrat.
+Weakness: Kouzlo, ktere zmensi silu a inteligenci o pulku.
+Heal: Lektvar, ktery ti navrati zivoty na maximalni uroven.
+!VSECNA KOUZLA LZE POUZIT POUZE JEDNOU ZA BOJ!
+
+Pro spusteni hry napis start:

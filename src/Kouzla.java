@@ -8,24 +8,26 @@ public class Kouzla {
         int hit = a.getInteligence() + 25;
         b.setZdravi(b.getZdravi() - hit);
         System.out.println(a.getTyp() + " pouzil fireball!");
-        System.out.print(b.getTyp() + " zdravi: " + b.getZdravi());
+        System.out.println("Hit: -" + hit);
+        System.out.println(b.getTyp() + " zdravi: " + b.getZdravi());
     }
 
     // 2. kouzlo: Poison = otrava do te doby, dokud souper nebo hrac nezemre
     public void poison(Postava a, Postava b){
         int hit = a.getInteligence()/4;
         System.out.println(a.getTyp() + " pouzil poison!");
-        while (a.getZdravi() != 0 || b.getZdravi() != 0){
+        while (a.getZdravi() != 0 && b.getZdravi() != 0){
             b.setZdravi(b.getZdravi() - hit);
-            System.out.print(b.getTyp() + " zdravi: " + b.getZdravi());
+            System.out.println("Hit: -" + hit);
+            System.out.println(b.getTyp() + " zdravi: " + b.getZdravi());
         }
     }
 
     // 3. kouzlo: Heal = Uzdraveni zivotu
     public void heal(Postava a){
         a.setZdravi(a.getMaxZdravi());
-        System.out.println(a.getTyp() + " pouzil poison!");
-        System.out.print(a.getTyp() + " zdravi: " + a.getZdravi());
+        System.out.println(a.getTyp() + " pouzil heal!");
+        System.out.println(a.getTyp() + " zdravi: " + a.getZdravi());
     }
 
     // 4. kouzlo weakness = Oslabeni protihrace na pristi uder
@@ -48,7 +50,8 @@ public class Kouzla {
         int hit = a.getInteligence()/2;
         b.setZdravi(b.getZdravi()-hit);
         System.out.println(a.getTyp() + " pouzil zap!");
-        System.out.print(b.getTyp() + " zdravi: " + b.getZdravi());
+        System.out.println("Hit: -" + hit);
+        System.out.println(b.getTyp() + " zdravi: " + b.getZdravi());
     }
 
 }

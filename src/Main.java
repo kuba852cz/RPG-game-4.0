@@ -1,5 +1,3 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
 
@@ -7,6 +5,8 @@ public class Main {
         Carodej carodej = new Carodej(1000,100,100,100,"Carodej",100);
         Hrac hrac = new Hrac(1000,100,100,100,"Hrac",100,100);
 
+        Console console = new Console();
+        console.start();
 
     }
 }

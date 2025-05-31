@@ -5,12 +5,10 @@ public class Hrac extends Postava implements Killable {
 
     private int dovednostniBody;
     Scanner sc = new Scanner(System.in);
-    ArrayList<Kouzla> kouzla;
 
     public Hrac(int zdravi, int sila, int inteligence, int stesti, String typ, int maxZdravi, int dovednostniBody) {
         super(zdravi, sila, inteligence, stesti, typ, maxZdravi);
         this.dovednostniBody = dovednostniBody;
-        kouzla = new ArrayList<>();
     }
 
     @Override
@@ -54,10 +52,48 @@ public class Hrac extends Postava implements Killable {
         System.out.println("Tvuj aktualni pocet dovednostich bodu je: " + dovednostniBody);
     }
 
-    public void magickyUtok(Postava postava){
+    public void magickyUtok(Postava a, Postava b) {
+        Kouzla kouzla = new Kouzla();
         System.out.println("Vyber si jakou magii chces pouzit: ");
+        System.out.println("1) Fireball, 2) Poison, 3) Zap, 4) Weakness, 5) Heal");
+        switch (sc.nextInt()) {
+            case 1:
+                kouzla.fireball(a, b);
+                break;
+            case 2:
+                kouzla.poison(a, b);
+                break;
+            case 3:
+                kouzla.zap(a, b);
+                break;
+            case 4:
+                kouzla.weakness(a, b);
+                break;
+            case 5:
+                kouzla.heal(a);
+                break;
+            default:
+                System.out.println("Chybna volba!");
+
+        }
+
 
     }
+
+    public void utok(Postava a, Postava b){
+        System.out.println("Vyber si utok: ");
+        System.out.println("1) Klasicky utok, 2) Magicky utok");
+
+        if (sc.nextInt() == 1) {
+            a.rucniUtok(a,b);
+        } else if (sc.nextInt() == 2) {
+            magickyUtok(a,b);
+        }else{
+            System.out.println("Chyba");
+        }
+    }
+
+
 
 }
 
