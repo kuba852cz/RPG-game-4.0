@@ -8,5 +8,7 @@ public class Main {
         Console console = new Console();
         console.start();
 
+        System.out.println("Zkouska");
+
     }
 }
