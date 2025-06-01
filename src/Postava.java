@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public abstract class Postava implements Killable {
 
@@ -11,15 +12,19 @@ public abstract class Postava implements Killable {
     private int maxSila;
     private int maxInteligence;
     private boolean oslaben = false;
+    private boolean jeOtravena;
+    private int pocetKolOtravy;
+    protected int dovednostniBody;
 
     Random rd = new Random();
 
-    public Postava(int zdravi, int sila, int inteligence, int stesti, String typ) {
+    public Postava(int zdravi, int sila, int inteligence, int stesti, String typ, int dovednostniBody) {
         setZdravi(zdravi);
         this.sila = sila;
         this.inteligence = inteligence;
         this.stesti = stesti;
         this.typ = typ;
+        this.dovednostniBody = dovednostniBody;
         this.maxZdravi = zdravi;
         this.maxSila = sila;
         this.maxInteligence = inteligence;
@@ -41,7 +46,7 @@ public abstract class Postava implements Killable {
             b.setZdravi(b.getZdravi() - hit);
             System.out.println(a.getTyp() + " pouzil utok!");
             System.out.println("Hit: -" + hit);
-
+            System.out.println(b.getTyp() + " zdravi: " + b.getZdravi());
         }
         b.zrusitOslabeni();
         System.out.println();
@@ -60,6 +65,16 @@ public abstract class Postava implements Killable {
             this.setSila(this.getMaxSila());
             this.setInteligence(this.getMaxInteligence());
             oslaben = false;
+        }
+    }
+
+    public void otraveni(Postava a, Postava b) {
+        if (!jeOtravena) {
+            b.setZdravi(b.getZdravi() - (a.getInteligence()/4));
+            jeOtravena = true;
+        } else if (pocetKolOtravy > 0 && jeOtravena) {
+            pocetKolOtravy--;
+            if ()
         }
     }
 
@@ -139,6 +154,14 @@ public abstract class Postava implements Killable {
         this.oslaben = oslaben;
     }
 
+    public int getDovednostniBody() {
+        return dovednostniBody;
+    }
+
+    public void setDovednostniBody(int dovednostniBody) {
+        this.dovednostniBody = dovednostniBody;
+    }
+
     @Override
     public String toString() {
         return typ +
@@ -147,6 +170,30 @@ public abstract class Postava implements Killable {
                 ", inteligence = " + inteligence +
                 ", stesti = " + stesti;
     }
+
+    public int ohlidaniVolby(int min, int max, String vyber){
+        Scanner sc = new Scanner(System.in);
+        int volba;
+        while(true){
+            System.out.println(vyber);
+            if (sc.hasNextInt()) {
+                volba = sc.nextInt();
+                if (volba >= min && volba <= max) {
+                    return volba;
+                }else{
+                    System.out.println("Zadal si spatne cislo.");
+                }
+            }else{
+                System.out.println("Toto neni cislo!");
+                sc.next();
+            }
+        }
+    }
+
+
+
+
+
 
 }
 

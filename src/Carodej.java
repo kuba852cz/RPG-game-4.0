@@ -4,8 +4,8 @@ public class Carodej extends Postava{
 
     Random rd = new Random();
 
-    public Carodej(int zdravi, int sila, int inteligence, int stesti, String typ) {
-        super(zdravi, sila, inteligence, stesti, typ);
+    public Carodej(int zdravi, int sila, int inteligence, int stesti, String typ, int dovednostniBody) {
+        super(zdravi, sila, inteligence, stesti, typ, dovednostniBody);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class Carodej extends Postava{
     @Override
     public void kill() {
         System.out.println("Dobra prace! Zabil si ho!");
-        System.out.println("Obdrzel si z nej 1 dovednostni bod!");
+        System.out.println("Obdrzel si z nej " + dovednostniBody + " bodu!");
         System.out.println();
     }
 
@@ -37,7 +37,7 @@ public class Carodej extends Postava{
         } else if (50< random && random<=80) {
             kouzla.zap(a, b);
         } else if (80< random && random <99 && zdravi>= 100) {
-            kouzla.heal(a);
+            kouzla.heal(a, b);
         }
     }
 

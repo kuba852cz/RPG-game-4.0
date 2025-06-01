@@ -1,1 +1,10 @@
-Vstoupil
+Dokazal si to! Vystoupal si az na vrchol veze, kde se nachazi zahadny carodej.
+Vsude kolem tebe jsou louce, ktere vedou k obrimu trunu, na kterem na tebe ceka.
+Vedle trunu je klec, kde taky drzi tvou zenu.
+Zahadny carodej: "Dobra prace hochu. Ani jsem necekal ze se dostanes az sem, ale kdyz jses ten udajny Runovy rytir, tak jsem s tim musel pocitat."
+Ty: "Konec reci! Kdo jses a co po me chces?"
+Zahadny carodej: "Me zase przdivaji Sedovous Mrzuty. Ty, chlapce, jsi posledni kdo se mi muze rovnat. Potrebuju se ujistit ze jsem ja ten nejmocnejsi."
+Ty: "Proto si me donutil sem jit?"
+Sedovous Mrzuty: "Ano. Nehodlam to ale dlouho okecavat"
+
+Jses pripraven na final Boss fight? (Napis: "1")

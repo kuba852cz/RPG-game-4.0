@@ -1,6 +1,8 @@
 Vitej v me RPG hre!
 
 Lore:
+Jses legendarni bojovnik, ktery uz bohuzel skoncil s bojem a rikavalo se ti "Runovy rytir".
+- "V bojich zarily jeho brneni i oci. Znaky na kuzi septaly slova sily."
 Tajemny vseved poslal sve poddane, aby ti sebrali vsechno na cem ti kdy zalezolo.
 Kdyz se vratis domu a volas na svou zenu, tak se nikdo neozyva.
 Na stole lezi vzkaz, kde je napsano:
@@ -25,4 +27,4 @@ Weakness: Kouzlo, ktere zmensi silu a inteligenci o pulku.
 Heal: Lektvar, ktery ti navrati zivoty na maximalni uroven.
 !VSECNA KOUZLA LZE POUZIT POUZE JEDNOU ZA BOJ!
 
-Pro spusteni hry napis start:
+Pro spusteni hry napis 1:

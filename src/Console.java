@@ -12,16 +12,16 @@ public class Console {
 
     public void start(){
 
-        Hrac hrac = new Hrac(10000,100,100,100,"Hrac",100);
-        enemy.add(new Barbar(100,100,100,100,"Barbar"));
-        enemy.add(new Barbar(100,100,100,100,"Barbar"));
-        enemy.add(new Barbar(100,100,100,100,"Barbar"));
-        enemy.add(new Barbar(100,100,100,100,"Barbar"));
-        enemy.add(new Barbar(100,100,100,100,"Barbar"));
-        enemy.add(new Barbar(100,100,100,100,"Barbar"));
-        enemy.add(new Barbar(100,100,100,100,"Barbar"));
-        enemy.add(new Barbar(100,100,100,100,"Barbar"));
-        enemy.add(new Barbar(100,100,100,100,"Barbar"));
+        Hrac hrac = new Hrac(500,100,100,15,"Hrac",3);
+        enemy.add(new Barbar(400,150,75,10,"Barbar",1));
+        enemy.add(new Barbar(500,175,100,15,"Barbar",1));
+        enemy.add(new Carodej(550,75,100,100,"Carodej",1));
+        enemy.add(new Barbar(600,200,125,20,"Barbar",1));
+        enemy.add(new Carodej(650,100,100,100,"Carodej",1));
+        enemy.add(new Carodej(700,125,100,100,"Carodej",1));
+        enemy.add(new Barbar(800,250,150,35,"Barbar",1));
+        enemy.add(new Carodej(900,150,100,100,"Carodej",1));
+        enemy.add(new Barbar(1000,300,175,40,"Barbar",1));
 
         try (BufferedReader br = new BufferedReader(new FileReader("src/uvod.txt"))) {
             String text;
@@ -34,49 +34,53 @@ public class Console {
         } catch (IOException e) {
             System.out.println("Problem se souborem");
         }
-
-        if (sc.nextLine().equalsIgnoreCase("start")){
+        if (hrac.ohlidaniVolby(1,1,"") == 1) {
             for (int i = 0; i < enemy.size(); i++) {
-                System.out.println("Prejes si neco udelat pred tim nez se vrhnem do boje?");
-                System.out.println("1) Continue, 2) Vylepsit,  3) Exit");
-                switch (sc.nextInt()){
-                    case 1:
-                        break;
-                    case 2:
-                        hrac.vylepsit();
-                        break;
-                    case 3:
-                        System.exit(0);
-                        break;
-                }
+                int volba = 0;
+                System.out.println("Aktualni pocet dovednostnich bodu: " + hrac.getDovednostniBody());
+                do {
+                    System.out.println("Prejes si neco udelat pred tim nez se vrhnem do boje?");
+                    volba = hrac.ohlidaniVolby(1, 3, "1) Continue, 2) Vylepsit,  3) Exit");
+                    switch (volba) {
+                        case 1:
+                            break;
+                        case 2:
+                            hrac.vylepsit();
+                            break;
+                        case 3:
+                            System.exit(0);
+                            break;
+                    }
+                } while (volba != 1);
                 System.out.println("Mame tady:");
                 System.out.println(enemy.get(i));
                 System.out.println();
-                while(enemy.get(i).getZdravi() >0 && hrac.getZdravi() >0){
-                    if (enemy.get(i).getTyp().equalsIgnoreCase("barbar")){
+                while (enemy.get(i).getZdravi() > 0 && hrac.getZdravi() > 0) {
+                    if (enemy.get(i).getTyp().equalsIgnoreCase("barbar")) {
                         enemy.get(i).rucniUtok(enemy.get(i), hrac);
-                        if (hrac.getZdravi() < 0){
+                        if (hrac.getZdravi() <= 0) {
                             hrac.kill();
                             break;
                         }
 
                         hrac.utok(hrac, enemy.get(i));
-                        if(enemy.get(i).getZdravi() <= 0) {
+                        if (enemy.get(i).getZdravi() <= 0) {
                             enemy.get(i).kill();
+                            hrac.setDovednostniBody(hrac.getDovednostniBody() + enemy.get(i).dovednostniBody);
+                            hrac.setZdravi(hrac.getMaxZdravi());
                             break;
                         }
-                    }else{
+                    } else {
                         hrac.utok(hrac, enemy.get(i));
-                        if(enemy.get(i).getZdravi() <= 0) {
+                        if (enemy.get(i).getZdravi() <= 0) {
                             enemy.get(i).kill();
                             hrac.setDovednostniBody(hrac.getDovednostniBody() + 1);
                             hrac.setZdravi(hrac.getMaxZdravi());
-                            System.out.println("Aktualni pocet dovednostnich bodu: " + hrac.getDovednostniBody());
                             System.out.println();
                             break;
                         }
                         enemy.get(i).rucniUtok(enemy.get(i), hrac);
-                        if (hrac.getZdravi() < 0){
+                        if (hrac.getZdravi() <= 0) {
                             hrac.kill();
                             break;
                         }
@@ -85,7 +89,7 @@ public class Console {
             }
             try (BufferedReader br = new BufferedReader(new FileReader("src/zaver.txt"))) {
                 String text;
-                while((text = br.readLine()) != null){
+                while ((text = br.readLine()) != null) {
                     System.out.println(text);
                 }
                 br.close();
@@ -94,9 +98,26 @@ public class Console {
             } catch (IOException e) {
                 System.out.println("Problem se souborem");
             }
+
+            Carodej SedovousMrzuty = new Carodej(1000, 200, 200, 50, "Sedovous Mrzuty", 0);
+            if (hrac.ohlidaniVolby(1,1,"") == 1) {
+                while (SedovousMrzuty.getZdravi() > 0 && hrac.getZdravi() > 0) {
+                    hrac.utok(hrac, SedovousMrzuty);
+                    if (SedovousMrzuty.getZdravi() <= 0) {
+                        SedovousMrzuty.kill();
+                        System.out.println();
+                        break;
+                    }
+                    SedovousMrzuty.rucniUtok(SedovousMrzuty, hrac);
+                    if (hrac.getZdravi() <= 0) {
+                        hrac.kill();
+                        System.out.println();
+                        break;
+                    }
+                }
+            }
+        }
             System.out.println("GRATULUJU! Vyhral si! Porazil si Sedovouse Mrzuteho a odesel si spolecne se svou zenou domu.");
         }
 
     }
-
-}
