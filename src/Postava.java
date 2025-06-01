@@ -7,18 +7,26 @@ public abstract class Postava implements Killable {
     protected int inteligence;
     protected int stesti;
     protected String typ;
-    protected int maxZdravi;
+    private int maxZdravi;
+    private int maxSila;
+    private int maxInteligence;
+    private boolean oslaben = false;
 
     Random rd = new Random();
 
-    public Postava(int zdravi, int sila, int inteligence, int stesti, String typ, int maxZdravi) {
-        this.zdravi = zdravi;
+    public Postava(int zdravi, int sila, int inteligence, int stesti, String typ) {
+        setZdravi(zdravi);
         this.sila = sila;
         this.inteligence = inteligence;
         this.stesti = stesti;
         this.typ = typ;
         this.maxZdravi = zdravi;
+        this.maxSila = sila;
+        this.maxInteligence = inteligence;
     }
+
+    public abstract boolean utok(Postava a, Postava b);
+
 
     //klasicky utok
     public void rucniUtok(Postava a, Postava b) {
@@ -33,9 +41,26 @@ public abstract class Postava implements Killable {
             b.setZdravi(b.getZdravi() - hit);
             System.out.println(a.getTyp() + " pouzil utok!");
             System.out.println("Hit: -" + hit);
-            b.kill();
+
         }
+        b.zrusitOslabeni();
         System.out.println();
+    }
+
+    public void oslabeni() {
+        if (!oslaben) {
+            this.setSila(this.getSila()/2);
+            this.setInteligence(this.getInteligence()/2);
+            oslaben = true;
+        }
+    }
+
+    public void zrusitOslabeni() {
+        if (oslaben) {
+            this.setSila(this.getMaxSila());
+            this.setInteligence(this.getMaxInteligence());
+            oslaben = false;
+        }
     }
 
     public int getZdravi() {
@@ -43,7 +68,11 @@ public abstract class Postava implements Killable {
     }
 
     public void setZdravi(int zdravi) {
-        this.zdravi = zdravi;
+        if (zdravi < 0) {
+            this.zdravi = 0;
+        } else {
+            this.zdravi = zdravi;
+        }
     }
 
     public int getSila() {
@@ -84,6 +113,30 @@ public abstract class Postava implements Killable {
 
     public void setMaxZdravi(int maxZdravi) {
         this.maxZdravi = maxZdravi;
+    }
+
+    public int getMaxInteligence() {
+        return maxInteligence;
+    }
+
+    public void setMaxInteligence(int maxInteligence) {
+        this.maxInteligence = maxInteligence;
+    }
+
+    public int getMaxSila() {
+        return maxSila;
+    }
+
+    public void setMaxSila(int maxSila) {
+        this.maxSila = maxSila;
+    }
+
+    public boolean isOslaben() {
+        return oslaben;
+    }
+
+    public void setOslaben(boolean oslaben) {
+        this.oslaben = oslaben;
     }
 
     @Override

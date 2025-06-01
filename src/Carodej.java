@@ -4,13 +4,25 @@ public class Carodej extends Postava{
 
     Random rd = new Random();
 
-    public Carodej(int zdravi, int sila, int inteligence, int stesti, String typ, int maxZdravi) {
-        super(zdravi, sila, inteligence, stesti, typ, maxZdravi);
+    public Carodej(int zdravi, int sila, int inteligence, int stesti, String typ) {
+        super(zdravi, sila, inteligence, stesti, typ);
+    }
+
+    @Override
+    public boolean utok(Postava a, Postava b) {
+        if (rd.nextInt(0,100) >70){
+            magickyUtok(a, b);
+        }else{
+            rucniUtok(a, b);
+        }
+        return true;
     }
 
     @Override
     public void kill() {
         System.out.println("Dobra prace! Zabil si ho!");
+        System.out.println("Obdrzel si z nej 1 dovednostni bod!");
+        System.out.println();
     }
 
     public void magickyUtok(Postava a, Postava b) {
@@ -29,12 +41,6 @@ public class Carodej extends Postava{
         }
     }
 
-    public void utok(Postava a, Postava b) {
-        if (rd.nextInt(0,100) >70){
-            magickyUtok(a, b);
-        }else{
-            rucniUtok(a, b);
-        }
-    }
+
 
 }

@@ -32,17 +32,10 @@ public class Kouzla {
 
     // 4. kouzlo weakness = Oslabeni protihrace na pristi uder
     public void weakness(Postava a, Postava b){
-        int maxSila = b.getSila();
-        int maxInteligence = b.getInteligence();
         System.out.println(a.getTyp() + " pouzil weakness!");
-        b.setSila(b.getSila()/2);
-        b.setInteligence(b.getInteligence()/2);
-        System.out.println("Aktualni sila: " + b.getSila());
-        System.out.println("Aktualni inteligence: " + b.getInteligence());
-        if(a.getZdravi() == 0){
-            b.setSila(maxSila);
-            b.setInteligence(maxInteligence);
-        }
+        b.oslabeni();
+        System.out.println(b.getTyp() +" aktualni sila: " + b.getSila());
+        System.out.println(b.getTyp() +" aktualni inteligence: " + b.getInteligence());
     }
 
     // 5. kouzlo zap = malicky blesk, po kterem muzes pokracovat v tahu

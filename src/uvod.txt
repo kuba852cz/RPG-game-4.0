@@ -1,6 +1,16 @@
 Vitej v me RPG hre!
 
+Lore:
+Tajemny vseved poslal sve poddane, aby ti sebrali vsechno na cem ti kdy zalezolo.
+Kdyz se vratis domu a volas na svou zenu, tak se nikdo neozyva.
+Na stole lezi vzkaz, kde je napsano:
+"Pokud jsi tak odvazny bojovnik jak se rika, tak dojdi na vrchol veze a tam najdes co hledas!"
+Nevahal si ani vterinu a vzal sis vyzbroj spolecne s knihou, kde mas spelly a vyrazil si k vezi.
+Nesla prehlednout. Jedina vez sirokodaleko byla pouze tahle.
+Vesel si dovnitr a je tam nekolik poddanych, kteri te budou chtit odzkouset, nez se dostanes k tomu koho hledas!
+
 Cilem hry je dostat se na vrchol veze a zabit veskere nepratele, kteri ti v tom budou branit.
+Hra se ovlada cislama!
 Zde jsou vysvetleny veskere atributy a kouzla:
 
 Zdravi: Tvuj aktualni pocet zivotu.
