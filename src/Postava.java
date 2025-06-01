@@ -8,13 +8,19 @@ public abstract class Postava implements Killable {
     protected int inteligence;
     protected int stesti;
     protected String typ;
+    protected int dovednostniBody;
     private int maxZdravi;
     private int maxSila;
     private int maxInteligence;
     private boolean oslaben = false;
     private boolean jeOtravena;
     private int pocetKolOtravy;
-    protected int dovednostniBody;
+    private boolean jePouzitFireball;
+    private boolean jePouzitPoison;
+    private boolean jePouzitZap;
+    private boolean jePouzitWeakness;
+    private boolean jePouzitHeal;
+
 
     Random rd = new Random();
 
@@ -74,8 +80,15 @@ public abstract class Postava implements Killable {
             jeOtravena = true;
         } else if (pocetKolOtravy > 0 && jeOtravena) {
             pocetKolOtravy--;
-            if ()
         }
+    }
+
+    public void resetKouzel(Postava a) {
+        jePouzitFireball = false;
+        jePouzitPoison = false;
+        jePouzitZap = false;
+        jePouzitWeakness = false;
+        jePouzitHeal = false;
     }
 
     public int getZdravi() {
@@ -189,11 +202,6 @@ public abstract class Postava implements Killable {
             }
         }
     }
-
-
-
-
-
 
 }
 
