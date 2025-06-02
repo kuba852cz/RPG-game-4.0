@@ -11,7 +11,6 @@ public class Hrac extends Postava implements Killable {
 
     @Override
     public void kill() {
-        System.out.println();
         System.out.println("GAME OVER: Zemrel jsi");
         System.exit(0);
     }

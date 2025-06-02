@@ -10,6 +10,9 @@ public class Console {
     public Console() {
     }
 
+    //Start programu, ktery ma na svedomi prubeh cele hry, to jest: Spravne printnuti uvod a zaveru. Cyklus souboje, aby kdyz se bojuje proti barbarovi, tak aby zacinal a kouzelnik naopak.
+    //Predtim nez zacne boj, tak hrac musi potvrdit, ze chce pokracovat a nechce hru ukoncit ci si neco vylepsit. Pokud v prubehu boje da smrtici ranu hrac, tak se privola enemy postave metoda kill.
+    //Cela logika bezi dokud vsechny z arraylistu neporazi hrac. v tom pripade nastane boss fight, ve kterem kdyz hrac vyhraje, tak mu program pogratuluje a ukonci se.
     public void start(){
 
         Hrac hrac = new Hrac(500,100,100,15,"Hrac",3);
@@ -21,7 +24,7 @@ public class Console {
         enemy.add(new Carodej(700,125,100,100,"Carodej",1));
         enemy.add(new Barbar(800,250,150,35,"Barbar",1));
         enemy.add(new Carodej(900,150,100,100,"Carodej",1));
-        enemy.add(new Barbar(1000,300,175,40,"Barbar",1));
+        enemy.add(new Barbar(100,300,175,40,"Barbar",1));
 
         try (BufferedReader br = new BufferedReader(new FileReader("src/uvod.txt"))) {
             String text;
@@ -68,6 +71,7 @@ public class Console {
                             enemy.get(i).kill();
                             hrac.setDovednostniBody(hrac.getDovednostniBody() + enemy.get(i).dovednostniBody);
                             hrac.setZdravi(hrac.getMaxZdravi());
+                            hrac.resetKouzel(hrac);
                             break;
                         }
                     } else {
@@ -77,6 +81,7 @@ public class Console {
                             hrac.setDovednostniBody(hrac.getDovednostniBody() + 1);
                             hrac.setZdravi(hrac.getMaxZdravi());
                             System.out.println();
+                            hrac.resetKouzel(hrac);
                             break;
                         }
                         enemy.get(i).rucniUtok(enemy.get(i), hrac);
@@ -99,7 +104,7 @@ public class Console {
                 System.out.println("Problem se souborem");
             }
 
-            Carodej SedovousMrzuty = new Carodej(1000, 200, 200, 50, "Sedovous Mrzuty", 0);
+            Carodej SedovousMrzuty = new Carodej(1000, 20, 200, 50, "Sedovous Mrzuty", 0);
             if (hrac.ohlidaniVolby(1,1,"") == 1) {
                 while (SedovousMrzuty.getZdravi() > 0 && hrac.getZdravi() > 0) {
                     hrac.utok(hrac, SedovousMrzuty);

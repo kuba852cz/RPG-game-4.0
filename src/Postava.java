@@ -203,5 +203,60 @@ public abstract class Postava implements Killable {
         }
     }
 
+    public boolean isJeOtravena() {
+        return jeOtravena;
+    }
+
+    public void setJeOtravena(boolean jeOtravena) {
+        this.jeOtravena = jeOtravena;
+    }
+
+    public int getPocetKolOtravy() {
+        return pocetKolOtravy;
+    }
+
+    public void setPocetKolOtravy(int pocetKolOtravy) {
+        this.pocetKolOtravy = pocetKolOtravy;
+    }
+
+    public boolean isJePouzitFireball() {
+        return jePouzitFireball;
+    }
+
+    public boolean isJePouzitPoison() {
+        return jePouzitPoison;
+    }
+
+    public boolean isJePouzitZap() {
+        return jePouzitZap;
+    }
+
+    public boolean isJePouzitWeakness() {
+        return jePouzitWeakness;
+    }
+
+    public boolean isJePouzitHeal() {
+        return jePouzitHeal;
+    }
+
+    public void setJePouzitFireball(boolean jePouzitFireball) {
+        this.jePouzitFireball = jePouzitFireball;
+    }
+
+    public void setJePouzitPoison(boolean jePouzitPoison) {
+        this.jePouzitPoison = jePouzitPoison;
+    }
+
+    public void setJePouzitZap(boolean jePouzitZap) {
+        this.jePouzitZap = jePouzitZap;
+    }
+
+    public void setJePouzitWeakness(boolean jePouzitWeakness) {
+        this.jePouzitWeakness = jePouzitWeakness;
+    }
+
+    public void setJePouzitHeal(boolean jePouzitHeal) {
+        this.jePouzitHeal = jePouzitHeal;
+    }
 }
 
