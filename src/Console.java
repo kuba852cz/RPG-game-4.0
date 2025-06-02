@@ -1,19 +1,22 @@
+/**
+ * Tato trida ma za ukol spojit veskere metody a tridy a utvorit z toho hlavni smycku hry
+ */
+
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Console {
 
-    Scanner sc = new Scanner(System.in);
     ArrayList<Postava> enemy = new ArrayList();
     private boolean prectenZaver;
 
     public Console() {
     }
 
-    //Start programu, ktery ma na svedomi prubeh cele hry, to jest: Spravne printnuti uvod a zaveru. Cyklus souboje, aby kdyz se bojuje proti barbarovi, tak aby zacinal a kouzelnik naopak.
-    //Predtim nez zacne boj, tak hrac musi potvrdit, ze chce pokracovat a nechce hru ukoncit ci si neco vylepsit. Pokud v prubehu boje da smrtici ranu hrac, tak se privola enemy postave metoda kill.
-    //Cela logika bezi dokud vsechny z arraylistu neporazi hrac. v tom pripade nastane boss fight, ve kterem kdyz hrac vyhraje, tak mu program pogratuluje a ukonci se.
+    /**
+     * Hlavni metoda programu, ktera spousti cely program
+     * Privola uvod a po te podle velikosti arraylistu uda kolikrat se smycka boje bude odehravat
+     */
     public void start() {
 
         Hrac hrac = new Hrac(500, 100, 100, 15, "Hrac", 3);
@@ -41,87 +44,108 @@ public class Console {
         }
         if (hrac.ohlidaniVolby(1, 1, "") == 1) {
             for (int i = 0; i < enemy.size(); i++) {
-                int volba = 0;
                 System.out.println("Aktualni pocet dovednostnich bodu: " + hrac.getDovednostniBody());
-                do {
-                    System.out.println("Prejes si neco udelat pred tim nez se vrhnem do boje?");
-                    volba = hrac.ohlidaniVolby(1, 3, "1) Continue, 2) Vylepsit,  3) Exit");
-                    switch (volba) {
-                        case 1:
-                            break;
-                        case 2:
-                            hrac.vylepsit();
-                            break;
-                        case 3:
-                            System.exit(0);
-                            break;
-                    }
-                } while (volba != 1);
+                vyberAkce(hrac);
                 System.out.println("Mame tady:");
                 System.out.println(enemy.get(i));
                 System.out.println();
-                while (enemy.get(i).getZdravi() > 0 && hrac.getZdravi() > 0) {
-                    if (enemy.get(i).getTyp().equalsIgnoreCase("barbar")) {
-                        enemy.get(i).rucniUtok(enemy.get(i), hrac);
-                        if (hrac.getZdravi() <= 0) {
-                            hrac.kill();
-                            break;
-                        }
+                boj(hrac, enemy.get(i));
+            }
+        }
+    }
 
-                        hrac.utok(hrac, enemy.get(i));
-                        if (enemy.get(i).getZdravi() <= 0) {
-                            enemy.get(i).kill();
-                            hrac.setDovednostniBody(hrac.getDovednostniBody() + enemy.get(i).dovednostniBody);
-                            hrac.setZdravi(hrac.getMaxZdravi());
-                            hrac.resetKouzel(hrac);
-                            break;
+    /**
+     * Smycka boje, ktera hlida proti komu hrac jde bojovat a podle toho bude zacinat urcita postava
+     * U final boss fightu je to stejne, akorat se predtim priola zaver a ujisti se aby uz nebyl privolan.
+     * Po kazdem utoku ze zkontroluje, zda to nebyl smrtici utok a pokud by byl, tak privola metodu kill
+     * @param hrac hrac
+     * @param b protihrac
+     */
+    public void boj(Postava hrac, Postava b){
+        Kouzla kouzla = new Kouzla();
+        while (b.getZdravi() > 0 && hrac.getZdravi() > 0) {
+            if (b.getTyp().equalsIgnoreCase("barbar")) {
+                b.utok(b, hrac);
+                if (hrac.getZdravi() <= 0) {
+                    hrac.kill();
+                    break;
+                }
+
+                hrac.utok(hrac, b);
+                if (b.getZdravi() <= 0) {
+                    b.kill();
+                    hrac.setDovednostniBody(hrac.getDovednostniBody() + b.dovednostniBody);
+                    hrac.setZdravi(hrac.getMaxZdravi());
+                    kouzla.resetKouzel(hrac);
+                    break;
+                }
+            } else if (b.getTyp().equalsIgnoreCase("carodej")) {
+                hrac.utok(hrac, b);
+                if (b.getZdravi() <= 0) {
+                    b.kill();
+                    hrac.setDovednostniBody(hrac.getDovednostniBody() + 1);
+                    hrac.setZdravi(hrac.getMaxZdravi());
+                    System.out.println();
+                    kouzla.resetKouzel(hrac);
+                    break;
+                }
+                b.utok(b, hrac);
+                if (hrac.getZdravi() <= 0) {
+                    hrac.kill();
+                    break;
+                }
+            } else if (b.getTyp().equalsIgnoreCase("Sedovous mrzuty")) {
+                if (!prectenZaver) {
+                    try (BufferedReader br = new BufferedReader(new FileReader("src/zaver.txt"))) {
+                        String text;
+                        while ((text = br.readLine()) != null) {
+                            System.out.println(text);
                         }
-                    } else if (enemy.get(i).getTyp().equalsIgnoreCase("carodej")) {
-                        hrac.utok(hrac, enemy.get(i));
-                        if (enemy.get(i).getZdravi() <= 0) {
-                            enemy.get(i).kill();
-                            hrac.setDovednostniBody(hrac.getDovednostniBody() + 1);
-                            hrac.setZdravi(hrac.getMaxZdravi());
-                            System.out.println();
-                            hrac.resetKouzel(hrac);
-                            break;
-                        }
-                        enemy.get(i).rucniUtok(enemy.get(i), hrac);
-                        if (hrac.getZdravi() <= 0) {
-                            hrac.kill();
-                            break;
-                        }
-                    } else if (enemy.get(i).getTyp().equalsIgnoreCase("Sedovous mrzuty")) {
-                       if (!prectenZaver) {
-                           try (BufferedReader br = new BufferedReader(new FileReader("src/zaver.txt"))) {
-                               String text;
-                               while ((text = br.readLine()) != null) {
-                                   System.out.println(text);
-                               }
-                               br.close();
-                           } catch (FileNotFoundException e) {
-                               System.out.println("Soubor nenalezen");
-                           } catch (IOException e) {
-                               System.out.println("Problem se souborem");
-                           }
-                           System.out.println();
-                           prectenZaver = true;
-                       }
-                        hrac.utok(hrac, enemy.get(i));
-                        if (enemy.get(i).getZdravi() <= 0) {
-                            System.out.println("GRATULUJU! Vyhral si! Porazil si Sedovouse Mrzuteho a odesel si spolecne se svou zenou domu.");
-                            System.out.println();
-                            break;
-                        }
-                        enemy.get(i).rucniUtok(enemy.get(i), hrac);
-                        if (hrac.getZdravi() <= 0) {
-                            hrac.kill();
-                            System.out.println();
-                            break;
-                        }
+                        br.close();
+                    } catch (FileNotFoundException e) {
+                        System.out.println("Soubor nenalezen");
+                    } catch (IOException e) {
+                        System.out.println("Problem se souborem");
                     }
+                    System.out.println();
+                    prectenZaver = true;
+                }
+                hrac.utok(hrac, b);
+                if (b.getZdravi() <= 0) {
+                    System.out.println("GRATULUJU! Vyhral si! Porazil si Sedovouse Mrzuteho a odesel si spolecne se svou zenou domu.");
+                    System.out.println();
+                    break;
+                }
+                b.utok(b, hrac);
+                if (hrac.getZdravi() <= 0) {
+                    hrac.kill();
+                    System.out.println();
+                    break;
                 }
             }
         }
     }
+
+    /**
+     * Jednoduchy cyklus, ve kterem hrac si vybira, zda chce neco vylepsit a pokud jo privola metodu hrace jmenem vylepsit
+     * @param hrac hrac
+     */
+    public void vyberAkce(Hrac hrac){
+       int volba;
+        do {
+            System.out.println("Prejes si neco udelat pred tim nez se vrhnem do boje?");
+            volba = hrac.ohlidaniVolby(1, 3, "1) Continue, 2) Vylepsit,  3) Exit");
+            switch (volba) {
+                case 1:
+                    break;
+                case 2:
+                    hrac.vylepsit();
+                    break;
+                case 3:
+                    System.exit(0);
+                    break;
+            }
+        } while (volba != 1);
+    }
+
 }

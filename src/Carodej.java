@@ -8,19 +8,30 @@ public class Carodej extends Postava{
         super(zdravi, sila, inteligence, stesti, typ, dovednostniBody);
     }
 
+    /**
+     * Metoda, ktera nahodne vybere typ utoku a jeste predtim zkontroluje zda neni postva otravena.
+     * @param a Utocnik
+     * @param b Na koho se utoci
+     * @return
+     */
     @Override
     public boolean utok(Postava a, Postava b) {
+        Kouzla kouzla = new Kouzla();
         if (a.isJeOtravena()){
-            a.otraveni(a, b);
+            kouzla.otraveni(a,b);
         }
-        if (rd.nextInt(0,100) >70){
+        if (rd.nextInt(0,100) >50){
             magickyUtok(a, b);
         }else{
             rucniUtok(a, b);
         }
+        kouzla.zrusitOslabeni(b);
         return true;
     }
 
+    /**
+     * Metoda, ktera po zemreni postavy vypise ze ho hrac zabil a kolik dovednostnich bodu z nej dostal.
+     */
     @Override
     public void kill() {
         System.out.println("Dobra prace! Zabil si ho!");
@@ -28,6 +39,11 @@ public class Carodej extends Postava{
         System.out.println();
     }
 
+    /**
+     * Metoda, ktera nahodne privola urcite kouzlo podle nastavene pravdepodobnosti.
+     * @param a Utocnik
+     * @param b Na koho se utoci
+     */
     public void magickyUtok(Postava a, Postava b) {
         int random = rd.nextInt(0,100);
         Kouzla kouzla = new Kouzla();
@@ -43,7 +59,5 @@ public class Carodej extends Postava{
             kouzla.heal(a, b);
         }
     }
-
-
 
 }

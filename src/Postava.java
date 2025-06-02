@@ -1,5 +1,4 @@
 import java.util.Random;
-import java.util.Scanner;
 
 public abstract class Postava implements Killable {
 
@@ -36,10 +35,19 @@ public abstract class Postava implements Killable {
         this.maxInteligence = inteligence;
     }
 
+    /**
+     * Abstrakntni metoda, ktera je pro kazdou postavu upravena
+     * @param a Utocnik
+     * @param b Na koho se utoci
+     * @return typ utoku
+     */
     public abstract boolean utok(Postava a, Postava b);
 
-
-    //klasicky utok
+    /**
+     * Utok, pri kterem se nahodne vybere cislo a pokud je vetsi nez stesti utocnika, tak se poskozeni zdvojnasobi
+     * @param a Utocnik
+     * @param b Na koho se utoci
+     */
     public void rucniUtok(Postava a, Postava b) {
         if (rd.nextInt(0, 100) < stesti) {
             int hit = a.getSila() *2;
@@ -54,50 +62,17 @@ public abstract class Postava implements Killable {
             System.out.println("Hit: -" + hit);
             System.out.println(b.getTyp() + " zdravi: " + b.getZdravi());
         }
-        b.zrusitOslabeni();
         System.out.println();
-    }
-
-    public void oslabeni() {
-        if (!oslaben) {
-            this.setSila(this.getSila()/2);
-            this.setInteligence(this.getInteligence()/2);
-            oslaben = true;
-        }
-    }
-
-    public void zrusitOslabeni() {
-        if (oslaben) {
-            this.setSila(this.getMaxSila());
-            this.setInteligence(this.getMaxInteligence());
-            oslaben = false;
-        }
-    }
-
-    public void otraveni(Postava a, Postava b) {
-        if (a.isJeOtravena()) {
-            a.setZdravi(a.getZdravi() - (b.getInteligence() / 4));
-            a.setPocetKolOtravy(a.getPocetKolOtravy() - 1);
-            System.out.println("Zbyvajici pocet kol otravy: " + b.getPocetKolOtravy());
-        }
-        if (a.getPocetKolOtravy() == 0){
-            a.setJeOtravena(false);
-            System.out.println("Poison uz vyprchal");
-        }
-    }
-
-    public void resetKouzel(Postava a) {
-        jePouzitFireball = false;
-        jePouzitPoison = false;
-        jePouzitZap = false;
-        jePouzitWeakness = false;
-        jePouzitHeal = false;
     }
 
     public int getZdravi() {
         return zdravi;
     }
 
+    /**
+     * setter, ktery zaroven hlida, aby nebylo zaporne
+     * @param zdravi zdravi
+     */
     public void setZdravi(int zdravi) {
         if (zdravi < 0) {
             this.zdravi = 0;
@@ -122,20 +97,8 @@ public abstract class Postava implements Killable {
         this.inteligence = inteligence;
     }
 
-    public int getStesti() {
-        return stesti;
-    }
-
-    public void setStesti(int stesti) {
-        this.stesti = stesti;
-    }
-
     public String getTyp() {
         return typ;
-    }
-
-    public void setTyp(String typ) {
-        this.typ = typ;
     }
 
     public int getMaxZdravi() {
@@ -150,16 +113,8 @@ public abstract class Postava implements Killable {
         return maxInteligence;
     }
 
-    public void setMaxInteligence(int maxInteligence) {
-        this.maxInteligence = maxInteligence;
-    }
-
     public int getMaxSila() {
         return maxSila;
-    }
-
-    public void setMaxSila(int maxSila) {
-        this.maxSila = maxSila;
     }
 
     public boolean isOslaben() {
@@ -176,34 +131,6 @@ public abstract class Postava implements Killable {
 
     public void setDovednostniBody(int dovednostniBody) {
         this.dovednostniBody = dovednostniBody;
-    }
-
-    @Override
-    public String toString() {
-        return typ +
-                ": zdravi = " + zdravi +
-                ", sila = " + sila +
-                ", inteligence = " + inteligence +
-                ", stesti = " + stesti;
-    }
-
-    public int ohlidaniVolby(int min, int max, String vyber){
-        Scanner sc = new Scanner(System.in);
-        int volba;
-        while(true){
-            System.out.println(vyber);
-            if (sc.hasNextInt()) {
-                volba = sc.nextInt();
-                if (volba >= min && volba <= max) {
-                    return volba;
-                }else{
-                    System.out.println("Zadal si spatne cislo.");
-                }
-            }else{
-                System.out.println("Toto neni cislo!");
-                sc.next();
-            }
-        }
     }
 
     public boolean isJeOtravena() {
@@ -260,6 +187,15 @@ public abstract class Postava implements Killable {
 
     public void setJePouzitHeal(boolean jePouzitHeal) {
         this.jePouzitHeal = jePouzitHeal;
+    }
+
+    @Override
+    public String toString() {
+        return typ +
+                ": zdravi = " + zdravi +
+                ", sila = " + sila +
+                ", inteligence = " + inteligence +
+                ", stesti = " + stesti;
     }
 }
 
