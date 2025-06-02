@@ -28,6 +28,7 @@ public class Hrac extends Postava implements Killable {
 
             if (dovednostniBody <= 0) {
                 System.out.println("Nemas dostatek dovednostnich bodu.");
+                System.out.println();
                 break;
             }
 
@@ -46,9 +47,14 @@ public class Hrac extends Postava implements Killable {
                     System.out.println("Tvoje aktualni inteligence je nyni: " + inteligence);
                     break;
                 case 4:
-                    stesti += 10;
-                    System.out.println("Tvoje aktualni stestí je nyni: " + stesti);
-                    break;
+                    if (stesti >= 100) {
+                        System.out.println("Stesti uz je na maximu!");
+                        System.out.println();
+                        vylepsit();
+                    }
+                        stesti += 10;
+                        System.out.println("Tvoje aktualni stestí je nyni: " + stesti);
+                        break;
             }
 
             dovednostniBody--;
@@ -60,13 +66,16 @@ public class Hrac extends Postava implements Killable {
     @Override
     public boolean utok(Postava a, Postava b) {
         Kouzla kouzla = new Kouzla();
+        if (a.isJeOtravena()){
+            a.otraveni(a, b);
+        }
         System.out.println("Vyber si jaky utok chces pouzit: ");
         switch (ohlidaniVolby(1,2,"1) Klasicky, 2) Magicky")) {
             case 1:
                 rucniUtok(a, b);
                 return true;
             case 2:
-               switch (ohlidaniVolby(1,5,"Vyber kouzlo: 1) Fireball, 2) Poison, 3) Zap, 4) Weakness, 5) Heal")) {
+               switch (ohlidaniVolby(1,6,"Vyber kouzlo: 1) Fireball, 2) Poison, 3) Zap, 4) Weakness, 5) Heal, 6) Back")) {
                    case 1:
                        kouzla.fireball(a, b);
                        return true;
@@ -82,13 +91,14 @@ public class Hrac extends Postava implements Killable {
                    case 5:
                        kouzla.heal(a, b);
                        return false;
+                   case 6:
+                       a.utok(a,b);
+                       break;
                    default:
-                       System.out.println("Chybna volba!");
                        return false;
 
                }
                default:
-                   System.out.println("Chybna volba!");
                    return false;
         }
     }

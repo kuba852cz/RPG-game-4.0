@@ -6,8 +6,17 @@ public class Barbar extends Postava{
 
     @Override
     public boolean utok(Postava a, Postava b) {
-        rucniUtok(a, b);
-        return true;
+        if (a.isJeOtravena()){
+            a.otraveni(a, b);
+        }
+        Kouzla kouzla = new Kouzla();
+        if (rd.nextInt(0,100) < 80){
+            rucniUtok(a, b);
+            return true;
+        }else{
+            kouzla.fireball(a, b);
+            return true;
+        }
     }
 
     @Override

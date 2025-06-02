@@ -75,11 +75,14 @@ public abstract class Postava implements Killable {
     }
 
     public void otraveni(Postava a, Postava b) {
-        if (!jeOtravena) {
-            b.setZdravi(b.getZdravi() - (a.getInteligence()/4));
-            jeOtravena = true;
-        } else if (pocetKolOtravy > 0 && jeOtravena) {
-            pocetKolOtravy--;
+        if (a.isJeOtravena()) {
+            a.setZdravi(a.getZdravi() - (b.getInteligence() / 4));
+            a.setPocetKolOtravy(a.getPocetKolOtravy() - 1);
+            System.out.println("Zbyvajici pocet kol otravy: " + b.getPocetKolOtravy());
+        }
+        if (a.getPocetKolOtravy() == 0){
+            a.setJeOtravena(false);
+            System.out.println("Poison uz vyprchal");
         }
     }
 

@@ -11,29 +11,30 @@ public class Kouzla {
             }
             a.utok(a, b);
         } else {
+            a.setJePouzitFireball(true);
             int hit = a.getInteligence() + 25;
             b.setZdravi(b.getZdravi() - hit);
             System.out.println(a.getTyp() + " pouzil fireball!");
             System.out.println("Hit: -" + hit);
             System.out.println(b.getTyp() + " zdravi: " + b.getZdravi());
             System.out.println();
-            a.setJePouzitFireball(true);
         }
     }
 
     // 2. kouzlo: Poison = otrava do te doby, dokud souper nebo hrac nezemre
     public void poison(Postava a, Postava b) {
+        System.out.println(a.getTyp() + " pouzil poison!");
         if (a.isJePouzitPoison()) {
             if (a.typ.equalsIgnoreCase("hrac")){
                 System.out.println("Toto kouzlo si uz tento souboj pouzil!");
             }
-            a.utok(a, b);
         } else {
-            int hit = a.getInteligence() / 4;
-            System.out.println(a.getTyp() + " pouzil poison!");
-            a.otraveni(a, b);
             a.setJePouzitPoison(true);
+            b.setPocetKolOtravy(3);
+            b.setJeOtravena(true);
+            System.out.println();
         }
+        a.utok(a,b);
     }
 
     // Nastavi postave zase zivoty na max a po pouziti muze hrac pokracovat
@@ -42,15 +43,14 @@ public class Kouzla {
             if (a.typ.equalsIgnoreCase("hrac")){
                 System.out.println("Toto kouzlo si uz tento souboj pouzil!");
             }
-            a.utok(a, b);
         } else {
+            a.setJePouzitWeakness(true);
             a.setZdravi(a.getMaxZdravi());
             System.out.println(a.getTyp() + " pouzil heal!");
             System.out.println(a.getTyp() + " zdravi: " + a.getZdravi());
             System.out.println();
-            a.utok(a, b);
-            a.setJePouzitHeal(true);
         }
+        a.utok(a,b);
     }
 
     /**
@@ -63,16 +63,15 @@ public class Kouzla {
             if (a.typ.equalsIgnoreCase("hrac")){
                 System.out.println("Toto kouzlo si uz tento souboj pouzil!");
             }
-            a.utok(a, b);
         } else {
+            a.setJePouzitWeakness(true);
             System.out.println(a.getTyp() + " pouzil weakness!");
             b.oslabeni();
             System.out.println(b.getTyp() + " aktualni sila: " + b.getSila());
             System.out.println(b.getTyp() + " aktualni inteligence: " + b.getInteligence());
             System.out.println();
-            a.utok(a, b);
-            a.setJePouzitWeakness(true);
         }
+        a.utok(a,b);
     }
 
     // 5. kouzlo zap = malicky blesk, po kterem muzes pokracovat v tahu
@@ -81,17 +80,16 @@ public class Kouzla {
             if (a.typ.equalsIgnoreCase("hrac")){
                 System.out.println("Toto kouzlo si uz tento souboj pouzil!");
             }
-            a.utok(a, b);
         } else {
+            a.setJePouzitZap(true);
             int hit = a.getInteligence() / 2;
             b.setZdravi(b.getZdravi() - hit);
             System.out.println(a.getTyp() + " pouzil zap!");
             System.out.println("Hit: -" + hit);
             System.out.println(b.getTyp() + " zdravi: " + b.getZdravi());
             System.out.println();
-            a.utok(a, b);
-            a.setJePouzitZap(true);
         }
+        a.utok(a,b);
     }
 
 

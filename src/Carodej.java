@@ -10,6 +10,9 @@ public class Carodej extends Postava{
 
     @Override
     public boolean utok(Postava a, Postava b) {
+        if (a.isJeOtravena()){
+            a.otraveni(a, b);
+        }
         if (rd.nextInt(0,100) >70){
             magickyUtok(a, b);
         }else{
