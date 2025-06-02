@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Console {
 
-    ArrayList<Postava> enemy = new ArrayList();
+    ArrayList<Postava> enemy = new ArrayList<>();
     private boolean prectenZaver;
 
     public Console() {
@@ -36,7 +36,6 @@ public class Console {
             while ((text = br.readLine()) != null) {
                 System.out.println(text);
             }
-            br.close();
         } catch (FileNotFoundException e) {
             System.out.println("Soubor nenalezen");
         } catch (IOException e) {
@@ -83,7 +82,7 @@ public class Console {
                 hrac.utok(hrac, b);
                 if (b.getZdravi() <= 0) {
                     b.kill();
-                    hrac.setDovednostniBody(hrac.getDovednostniBody() + 1);
+                    hrac.setDovednostniBody(hrac.getDovednostniBody() + b.dovednostniBody);
                     hrac.setZdravi(hrac.getMaxZdravi());
                     System.out.println();
                     kouzla.resetKouzel(hrac);
