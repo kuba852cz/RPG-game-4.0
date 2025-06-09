@@ -35,12 +35,12 @@ public class Kouzla {
      * @param b Na koho se utoci
      */
     public void poison(Postava a, Postava b) {
-        System.out.println(a.getTyp() + " pouzil poison!");
         if (a.isJePouzitPoison()) {
             if (a.typ.equalsIgnoreCase("hrac")){
                 System.out.println("Toto kouzlo si uz tento souboj pouzil!");
             }
         } else {
+            System.out.println(a.getTyp() + " pouzil poison!");
             a.setJePouzitPoison(true);
             b.setPocetKolOtravy(3);
             b.setJeOtravena(true);
@@ -81,7 +81,7 @@ public class Kouzla {
                 System.out.println("Toto kouzlo si uz tento souboj pouzil!");
             }
         } else {
-            a.setJePouzitWeakness(true);
+            a.setJePouzitHeal(true);
             a.setZdravi(a.getMaxZdravi());
             System.out.println(a.getTyp() + " pouzil heal!");
             System.out.println(a.getTyp() + " zdravi: " + a.getZdravi());
